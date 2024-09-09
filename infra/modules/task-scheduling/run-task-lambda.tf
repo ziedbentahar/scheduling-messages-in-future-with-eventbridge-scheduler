@@ -1,3 +1,16 @@
+resource "aws_lambda_event_source_mapping" "run_task_lambda" {
+  event_source_arn        = aws_sqs_queue.tasks.arn
+  function_name           = aws_lambda_function.run_task_lambda.function_name
+  
+  function_response_types = ["ReportBatchItemFailures"]
+
+  scaling_config {
+    maximum_concurrency = 50
+  }
+
+}
+
+
 resource "aws_iam_role" "run_task_lambda" {
 
   assume_role_policy = jsonencode({
