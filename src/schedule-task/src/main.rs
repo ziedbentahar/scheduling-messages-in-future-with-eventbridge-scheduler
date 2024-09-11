@@ -51,7 +51,7 @@ async fn process_records(
             response.batch_item_failures.push(DynamoDbBatchItemFailure {
                 item_identifier: record.change.sequence_number.clone(),
             });
-            return Ok(response);
+            
         }
     }
 
